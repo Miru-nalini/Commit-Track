@@ -8,7 +8,7 @@ const home = () => {
 
   return (
     <View>
-      <Text>Welcome back!{user?.email}</Text>
+      <Text style={styles.heading}>WELCOME BACK!{user?.email}</Text>
       <Button title="Sign out" onPress={() => auth().signOut()} />
     </View>
   )
@@ -16,4 +16,9 @@ const home = () => {
 
 export default home
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  heading:{
+    fontFamily:'bold',
+    fontSize:48,
+  }
+})

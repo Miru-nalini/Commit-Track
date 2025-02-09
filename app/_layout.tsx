@@ -2,8 +2,16 @@ import { Stack, useRouter, useSegments } from "expo-router";
 import { useEffect, useState } from "react";
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import { View, ActivityIndicator } from "react-native";
+import { useFonts } from "expo-font";
+
 
 export default function RootLayout() {
+
+  const [loaded, error] = useFonts({
+  });
+
+  if(!loaded || error) return null;
+
 
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState<FirebaseAuthTypes.User | null>();
@@ -44,9 +52,9 @@ export default function RootLayout() {
 
 
   return (
-    <Stack>
-      <Stack.Screen name="index" options={{headerShown:false}}/>
-      <Stack.Screen name="(app)" options={{headerShown:false}}/>
+    <Stack screenOptions={{headerShown:false}}>
+      <Stack.Screen name="index"/>
+      <Stack.Screen name="(app)"/>
     </Stack>
   );
 }
