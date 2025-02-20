@@ -1,9 +1,8 @@
 import { Button, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import auth from '@react-native-firebase/auth'
-import { router } from 'expo-router';
 
-const home = () => {
+const user = () => {
   const user = auth().currentUser;
 
   return (
@@ -14,11 +13,11 @@ const home = () => {
   )
 }
 
-export default home
+export default user
 
 const styles = StyleSheet.create({
-  heading:{
-    fontFamily:'bold',
-    fontSize:48,
+  heading: {
+    fontFamily: 'bold',
+    fontSize: 48,
   }
 })

@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import { Text, View, StyleSheet, KeyboardAvoidingView, TextInput, ActivityIndicator, Pressable } from "react-native";
 import auth from '@react-native-firebase/auth';
 import { FirebaseAuthTypes } from '@react-native-firebase/auth';
-import {useFonts,Kanit_400Regular,Kanit_400Regular_Italic,Kanit_100Thin,Kanit_100Thin_Italic,Kanit_600SemiBold,Kanit_600SemiBold_Italic, Kanit_200ExtraLight,Kanit_200ExtraLight_Italic} from '@expo-google-fonts/kanit'
+import {useFonts,Kanit_400Regular,Kanit_400Regular_Italic,Kanit_200ExtraLight,Kanit_200ExtraLight_Italic,Kanit_500Medium,Kanit_500Medium_Italic,Kanit_700Bold,Kanit_700Bold_Italic
+
+} from '@expo-google-fonts/kanit'
 import * as SplashScreen from 'expo-splash-screen';
 import { Dimensions } from 'react-native';
 
@@ -16,14 +18,14 @@ export default function Index() {
   const [loading, setLoading] = useState(false);
 
   const [fontsLoaded,fontsError] = useFonts({
-    'bold': Kanit_600SemiBold,
-    'boldItalic': Kanit_600SemiBold_Italic,
+    'bold': Kanit_700Bold,
+    'boldItalic': Kanit_700Bold_Italic,
+    'medium' : Kanit_500Medium,
+    'mediumItalic' : Kanit_500Medium_Italic,
     'regular': Kanit_400Regular,
     'regularItalic': Kanit_400Regular_Italic,
-    'thin': Kanit_100Thin,
-    'thinItalic': Kanit_100Thin_Italic,
-    'extraLight': Kanit_200ExtraLight,
-    'extraLightItalic': Kanit_200ExtraLight_Italic
+    'thin': Kanit_200ExtraLight,
+    'thinItalic': Kanit_200ExtraLight_Italic
   });
 
   useEffect(() => {
@@ -59,31 +61,34 @@ export default function Index() {
   }
 
   return (
-    <View style={[styles.container,{padding:40}]}>
-      <KeyboardAvoidingView behavior="padding" style={styles.container}>
-        <View style={{marginVertical:40,width:240,alignSelf:'flex-start'}}>
-          <Text style={styles.heading}>Lets</Text>
-          <Text style={styles.heading}>get</Text>
-          <Text style={styles.heading}>Started!</Text>
+    <View style={styles.container}>
+      <KeyboardAvoidingView behavior="padding">
+        <View style={{marginBottom:40,width:windowWidth-80}}>
+        <Text style={styles.heading}>Let's</Text>
+        <Text style={styles.heading}>get</Text>
+        <Text style={styles.heading}>started!</Text>
+
         </View>
         <View style={{alignItems:'center'}}>
         <TextInput
           style={styles.input}
-          placeholder="Email"
+          placeholder="Your email"
           value={email}
           onChangeText={setEmail}
           autoCapitalize="none"
           cursorColor={'gray'}
+          keyboardType="email-address"
         />
         <TextInput
           style={styles.input}
-          placeholder="Password"
+          placeholder="Your password"
           value={password}
           onChangeText={setPassword}
           autoCapitalize="none"
           cursorColor={'gray'}
           secureTextEntry
         />
+        <Text style={{fontFamily:'thin',fontSize:12,color:'darkBlue',alignSelf:'flex-end',textDecorationLine:'underline'}}>Forgot Password?</Text>
         
         {loading ? (
           <ActivityIndicator size={48} color="black" />
@@ -97,13 +102,15 @@ export default function Index() {
             </Pressable>
           </View>
         )}
-        <View style={{width:windowWidth-120, marginVertical:20,justifyContent:'space-evenly',alignItems:'center',flexDirection:'row'}}>
-          <View style={{height:1,backgroundColor:'gray',width:(windowWidth/2)-100}}/>
+
+        <View style={{width:'100%', marginVertical:40,justifyContent:'space-evenly',alignItems:'center',flexDirection:'row'}}>
+          <View style={{height:1,backgroundColor:'gray',width:'45%'}}/>
           <Text style={{fontFamily:'thin',fontSize:16,color:'black'}}> or </Text>
-          <View style={{height:1,backgroundColor:'gray',width:(windowWidth/2)-100}}/>
+          <View style={{height:1,backgroundColor:'gray',width:'45%'}}/>
         </View>
+
         <Pressable style={styles.button} onPress={()=>{}}>
-          <Text style={{fontFamily:'boldItalic',fontSize:20}}>SignIn with Google</Text>
+          <Text style={{fontFamily:'medium',fontSize:16}}>SignIn with Google</Text>
         </Pressable>
       </View>
       </KeyboardAvoidingView>
@@ -114,49 +121,51 @@ export default function Index() {
 const styles = StyleSheet.create({
   container:{
     flex:1,
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: 'white',
+    padding:40
   },
   heading:{
-    fontFamily: 'boldItalic',
+    fontFamily: 'bold',
     fontSize: 48,
   },
   input:{
-    width: windowWidth-80,
+    width: '100%',
     height: 50,
-    padding: 10,
-    paddingHorizontal: 20,
+    paddingHorizontal: 16,
+    paddingVertical:10,
     borderWidth: 1,
     borderStyle:'solid',
     borderColor: 'black',
     borderRadius:16,
     marginBottom: 10,
-    fontFamily:'semiBold',
+    fontFamily:'regular',
     fontSize: 16,
-    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.4)',    
+    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.25)',    
 
   },
   buttonView:{
-    width: 240,
+    width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 20,
   },
   button:{
     borderWidth: 1,
-    width: windowWidth-80,
+    width: '100%',
     marginTop:10,
     borderStyle:'solid',
     borderColor: 'black',
     borderRadius:16,
-    paddingHorizontal:20,
+    paddingHorizontal:16,
     paddingVertical:10,
     justifyContent: 'center',
     alignItems: 'center',
-    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.4)',    
+    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.25)',    
   },
   buttonText:{
-    fontFamily: 'boldItalic',
-    fontSize:20,
+    fontFamily: 'medium',
+    fontSize:16,
   }
 })
