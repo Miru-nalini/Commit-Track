@@ -16,6 +16,7 @@ export default function TabLayout() {
           borderWidth:0.5
         },
         tabBarShowLabel:false,
+        animation:'fade'
       }}>
       <Tabs.Screen
         name="user"
