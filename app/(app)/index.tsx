@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { KeyboardAvoidingView, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { Ionicons } from '@expo/vector-icons'
 import { router } from 'expo-router';
@@ -51,11 +51,11 @@ const home = () => {
   loadProgressBar();
 
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView style={styles.container}>
       <View style={styles.headerContainer}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
           <Text style={styles.heading}>My Commitments</Text>
-          <TouchableOpacity onPress={() => router.navigate('/(app)/add')}>
+          <TouchableOpacity onPress={() => router.push('/(app)/add')}>
             <Ionicons name='add' size={48} color='black' />
           </TouchableOpacity>
         </View>
@@ -69,7 +69,7 @@ const home = () => {
         <CircularProgressBar radius={radius} strokeWidth={strokeWidth} percentage={percentage} end={end} font={font}/>
       </View>
       
-    </View>
+    </KeyboardAvoidingView>
   )
 }
 
@@ -84,8 +84,7 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     width: '100%',
-    paddingVertical: 20,
-    paddingHorizontal: 20,
+    padding:20,
     justifyContent: 'space-between'
   },
   heading: {
