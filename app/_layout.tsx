@@ -2,6 +2,7 @@ import { Stack, useRouter, useSegments } from "expo-router";
 import { useEffect, useState } from "react";
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import { View, ActivityIndicator } from "react-native";
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useFonts } from "expo-font";
 
 export default function RootLayout() {
@@ -27,13 +28,10 @@ export default function RootLayout() {
 
     const inApp = segments[0] === "(app)";
     console.log("Segments:", segments);
-    console.log("inApp:", inApp, 'user:', user, 'user===null && inApp:', user === null && inApp);
 
     if (user === null && inApp) {
-      console.log("Redirecting to root index page");
       router.replace("/");
     } else if (user !== null && !inApp) {
-      console.log("Redirecting to (app) index page");
       router.replace("/(app)");
     }
   }, [router, user, segments, initializing]);
@@ -46,9 +44,11 @@ export default function RootLayout() {
     );
 
   return (
-    <Stack screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="index" />
-      <Stack.Screen name="(app)" />
-    </Stack>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="index" />
+        <Stack.Screen name="(app)" options={{animation:'slide_from_bottom'}} />
+      </Stack>
+    </GestureHandlerRootView>
   );
 }
